@@ -1,0 +1,47 @@
+file:
+  /radicale/config:
+    exists: true
+    mode: "0644"
+    owner: "root"
+    group: "root"
+    filetype: "file"
+  /radicale/data:
+    exists: true
+    owner: "radicale"
+    group: "radicale"
+    filetype: "directory"
+    mode: "0700"
+process:
+  radicale:
+    running: true
+    skip: false
+port:
+  tcp:5232:
+    listening: true
+    ip:
+      - 0.0.0.0
+    skip: false
+package:
+  radicale:
+    installed: true
+http:
+  http://localhost:5232/test:
+    status: 207
+    username: test
+    password: test
+    request-headers:
+      - "Depth: 1"
+      - "Content-type: application/xml"
+    request-body: "<D:propfind xmlns:D='DAV:'><D:allprop/></D:propfind>"
+    method: PROPFIND
+    body:
+      - "<status>HTTP/1.1 200 OK</status>"
+  http://localhost:5232/test/:
+    status: 401
+    username: test
+    password: wrong
+    request-headers:
+      - "Depth: 1"
+      - "Content-type: application/xml"
+    request-body: "<D:propfind xmlns:D='DAV:'><D:allprop/></D:propfind>"
+    method: PROPFIND
