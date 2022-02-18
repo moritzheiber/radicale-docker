@@ -1,6 +1,8 @@
 FROM ghcr.io/moritzheiber/alpine
 MAINTAINER Moritz Heiber <hello@heiber.im>
 
+LABEL org.opencontainers.image.source=https://github.com/moritzheiber/radicale-docker
+
 RUN apk --no-cache add radicale && \
   install -d -m0700 -o radicale -g radicale /radicale/data
 
